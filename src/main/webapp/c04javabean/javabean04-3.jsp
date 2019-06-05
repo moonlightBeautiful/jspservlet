@@ -1,18 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
-<%@ page import="java.util.*"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<title>confige对象从web.xml中拿数据</title>
+<title>实例化bean时，指定范围session</title>
 </head>
 <body>
-<%
-	String jdbcName=config.getInitParameter("jdbcName");
-	String dbUrl=config.getInitParameter("dbUrl");
-%>
-<h1>驱动名称：<%=jdbcName %></h1>
-<h1>连接地址：<%=dbUrl %></h1>
+<jsp:useBean id="student" scope="session" class="com.java1234.model.Student"/>
+<jsp:setProperty property="name" name="student" value="王八蛋"/>
+<jsp:setProperty property="age" name="student" value="12"/>
+<h1>Session数据设置完毕！</h1>
 </body>
 </html>
