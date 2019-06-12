@@ -1,27 +1,60 @@
 package com.java1234.servlet;
 
+import java.io.IOException;
+import java.sql.Connection;
+
 import javax.servlet.ServletException;
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
+import javax.servlet.http.HttpSession;
 
-/**
- * @author gaoxu
- * @date 2019-06-12 10:38
- * @description ... 类
- */
-public class LoginServlet extends HttpServlet {
+import com.java1234.dao.UserDao;
+import com.java1234.model.User;
+import com.java1234.util.DbUtil;
 
-    @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        super.doGet(req, resp);
-    }
+public class LoginServlet extends HttpServlet{
 
-    @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        super.doPost(req, resp);
-    }
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
+	DbUtil dbUtil=new DbUtil();
+	UserDao userDao=new UserDao();
+
+	@Override
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		this.doPost(request, response);
+	}
+
+	@Override
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		String userName=request.getParameter("userName");
+		String password=request.getParameter("password");
+		
+		Connection con=null;
+		try {
+			User user=new User(userName,password);
+			con=dbUtil.getCon();
+			User currentUser=userDao.login(con, user);
+			if(currentUser==null){
+				request.setAttribute("error", "�û������������");
+				request.setAttribute("userName", userName);
+				request.setAttribute("password", password);
+				request.getRequestDispatcher("login.jsp").forward(request, response);
+			}else{
+				HttpSession session=request.getSession();
+				session.setAttribute("currentUser", currentUser);
+				response.sendRedirect("main.jsp");
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	
 }
