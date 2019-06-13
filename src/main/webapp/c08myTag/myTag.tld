@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<taglib xmlns="http://java.sun.com/xml/ns/javaee"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-jsptaglibrary_2_1.xsd"
+        version="2.1">
+
+    <description>JSTL 1.1 core library</description>
+    <display-name>JSTL core</display-name>
+    <tlib-version>1.1</tlib-version>
+    <short-name>c</short-name>
+    <uri>http://java.sun.com/jsp/jstl/core</uri>
+    <tag>
+        <name>iterate</name>
+        <tag-class>
+            com.java1234.myDefTag.myDefineTag01
+        </tag-class>
+        <body-content>JSP</body-content>  <!-- 如果没有标签体，则写empty-->
+        <attribute>    <!-- 标签的属性，当标签没有属性的时候，可以不写 -->
+            <name>var</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <name>items</name>    <!-- 标签的属性名-->
+            <required>true</required>    <!-- 标签的属性是否必填-->
+            <rtexprvalue>true</rtexprvalue>    <!-- 标签的属性值是否支持表达式-->
+        </attribute>
+    </tag>
+
+    <tag>
+        <name>iterate2</name>
+        <tag-class>
+            com.java1234.myDefTag.myDefineTag02
+        </tag-class>
+        <body-content>scriptless</body-content>
+        <attribute>
+            <name>var</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <name>items</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+    </tag>
+
+</taglib>
