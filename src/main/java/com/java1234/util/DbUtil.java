@@ -5,9 +5,9 @@ import java.sql.DriverManager;
 
 public class DbUtil {
 
-    private String dbUrl = "jdbc:mysql://localhost:3306/db_jsp";
+    private String dbUrl = "jdbc:mysql://localhost:3306/db_jsp?serverTimezone=UTC&characterEncoding=utf8";
     private String dbUserName = "root";
-    private String dbPassword = "123456";
+    private String dbPassword = "root";
     private String jdbcName = "com.mysql.jdbc.Driver";
 
     public Connection getCon() throws Exception {
